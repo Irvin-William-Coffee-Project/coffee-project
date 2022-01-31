@@ -1,80 +1,5 @@
 "use strict"
 
-function filterCoffeeByName(event) {
-	event.preventDefault();
-	let tempArray = [];
-
-	for (let i = 0; i < coffees.length; i++) {
-
-		if (coffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && roastSelection.value === 'all') {
-			tempArray.push({'name': coffees[i].name, 'roast': coffees[i].roast});
-		} else if (coffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && coffees[i].roast === roastSelection.value) {
-			tempArray.push({'name': coffees[i].name, 'roast': coffees[i].roast});
-		}
-	}
-	coffeeList.innerHTML = printArray(tempArray);
-}
-
-// console.log(printArray(coffees))
-// Clears the inner html of div, prints out each element of the array as a string. returns the updated div html text
-function printArray(myArray) {
-
-	coffeeList.innerHTML = '';
-	for (let i = 0; i < myArray.length; i++) {
-		coffeeList.innerHTML += "<div class='coffeeBox col-5 '>" + myArray[i].name + " " + "<span class='roastFont'>" + myArray[i].roast + "</span>" + "</div>";
-	}
-	return coffeeList.innerHTML;
-}
-
-
-// function renderCoffee(coffee) {
-//     let html = '<tr class="coffee">';
-//     html += '<td>' + coffee.name + '</td>';
-//     html += '<td>' + coffee.roast + '</td>';
-//     html += '</tr>';
-//
-//     return html;
-// }
-
-// function renderCoffees(coffees) {
-//     let html = '';
-//     for(let i = coffees.length - 1; i >= 0; i--) {
-//         html += renderCoffee(coffees[i]);
-//     }
-//     return html;
-// }
-
-function updateCoffees(e) {
-	e.preventDefault(); // don't submit the form, we just want to update the data
-	let selectedRoast = roastSelection.value;
-	let filteredCoffees = [];
-	coffees.forEach(function (coffee) {
-		if (roastSelection.value === 'all') {
-			printArray(coffees);
-		} else if (coffee.roast === selectedRoast) {
-			filteredCoffees.push(coffee);
-			coffeeList.innerHTML = printArray(filteredCoffees);
-		}
-	});
-}
-
-//add new coffee function
-let newCoffee = [];
-
-function addCoffee(e) {
-	// e.preventDefault()
-	coffees.push({'id': coffees.length + 1, 'name': submitNameInput.value, 'roast': submitRoastSelection.value});
-	localStorage.setItem('coffees', JSON.stringify(coffees));
-	printArray(coffees);
-	// for (let i = 0; i < newCoffee.length; i++) {
-	// let newObject = window.localStorage.getItem("newCoffee");
-	// 	window.localStorage.setItem("newCoffee", JSON.stringify(newCoffee[i]));
-	// 	coffees.push(JSON.parse(newObject[i]));
-	// }
-	//
-	// printArray(coffees);
-}
-
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 let coffees = [
 	{id: 1, name: 'Light City', roast: 'light'},
@@ -92,6 +17,65 @@ let coffees = [
 	{id: 13, name: 'Italian', roast: 'dark'},
 	{id: 14, name: 'French', roast: 'dark'},
 ];
+function filterCoffeeByName(event) {
+	event.preventDefault();
+	let tempArray = [];
+
+	for (let i = 0; i < coffees.length; i++) {
+
+		if (coffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && roastSelection.value === 'all') {
+			tempArray.push({'name': coffees[i].name, 'roast': coffees[i].roast});
+		} else if (coffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && coffees[i].roast === roastSelection.value) {
+			tempArray.push({'name': coffees[i].name, 'roast': coffees[i].roast});
+		}
+	}
+	coffeeList.innerHTML = printArray(tempArray);
+}
+
+
+// Clears the inner html of div, prints out each element of the array as a string. returns the updated div html text
+function printArray(myArray) {
+
+	coffeeList.innerHTML = '';
+	for (let i = 0; i < myArray.length; i++) {
+		coffeeList.innerHTML += "<div class='coffeeBox col-5 '>" + myArray[i].name + " " + "<span class='roastFont'>" + myArray[i].roast + "</span>" + "</div>";
+	}
+	return coffeeList.innerHTML;
+}
+
+
+
+
+function updateCoffees(e) {
+	e.preventDefault(); // don't submit the form, we just want to update the data
+	let selectedRoast = roastSelection.value;
+	let filteredCoffees = [];
+	coffees.forEach(function (coffee) {
+		if (roastSelection.value === 'all') {
+			printArray(coffees);
+		} else if (coffee.roast === selectedRoast) {
+			filteredCoffees.push(coffee);
+			coffeeList.innerHTML = printArray(filteredCoffees);
+		}
+	});
+}
+
+//add new coffee function
+let newCoffee = [];
+let oldCoffeesPlusNewCoffees = [];
+function addCoffee(e) {
+	e.preventDefault();
+
+	newCoffee.push({'id': coffees.length + 1, 'name': submitNameInput.value, 'roast': submitRoastSelection.value});
+
+	localStorage.setItem('localStorage',JSON.stringify(newCoffee));
+
+	oldCoffeesPlusNewCoffees = coffees.concat(newCoffee);
+	console.log(oldCoffeesPlusNewCoffees);
+
+	printArray(oldCoffeesPlusNewCoffees);
+}
+
 //search
 let searchButton = document.querySelector('#search');
 let roastSelection = document.querySelector('#roast-selection');
@@ -113,23 +97,11 @@ inputValue.addEventListener('keyup', filterCoffeeByName);
 // add coffees from local storage to main coffee array
 
 function getLocalStorage() {
-	// if (window.localStorage.length === 0){
-	// 	console.log("empty");
-	// 	printArray(coffees);
-	// 	return;
-	// }
-	// let newObject = window.localStorage.getItem("coffees");
-	// for (let i = 0; i < newCoffee.length; i++) {
-	// 	window.localStorage.setItem("newCoffee", JSON.stringify(newCoffee[i]));
-	// }
-	// coffees.push(JSON.parse(newObject));
 
-	// localStorage.setItem('coffees', JSON.stringify(coffees));
-	// let storedCoffee = localStorage.getItem('coffees');
+	newCoffee = JSON.parse(localStorage.getItem('localStorage')) || [];
 
-
-	printArray(coffees);
-
+	oldCoffeesPlusNewCoffees = coffees.concat(newCoffee);
+	printArray(oldCoffeesPlusNewCoffees);
 }
 
 
