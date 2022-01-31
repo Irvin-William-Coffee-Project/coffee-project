@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    font-family: 'Bebas Neue', cursive;
+}
+
+body {
+    background-image: url("https://images.unsplash.com/photo-1620820186187-fc32e79adb74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#main-container {
+    background-color: rgba(255, 255, 255, 0.37);
+}
+
 table {
     border-collapse: collapse;
     margin: 15px 0;
@@ -13,8 +29,40 @@ td, th {
     font-size: 24px;
     padding: 1em;
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.81);
 }
 .roastFont {
-    opacity: .3;
-    font-size: 12px;
+    opacity: .5;
+    font-size: .75em;
+}
+
+.form-title {
+    font-size: 1.5em;
+}
+
+#main-title {
+    background-color: rgba(255, 255, 255, 0.81);
+    width: fit-content;
+    height: fit-content;
+    margin: 20px auto;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 2.5em;
+    font-weight: bolder;
+}
+
+#title-container {
+    background-color: rgba(255, 255, 255, 0.37);
+    height: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.opaque {
+    background-color: rgba(255, 255, 255, 0.81);
+}
+
+.coffee-color {
+    background-color: #6f4e37;
+    color: white;
 }
