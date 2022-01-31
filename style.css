@@ -7,3 +7,14 @@ td, th {
     border: 1px solid black;
     padding: 5px 10px;
 }
+
+.coffeeBox {
+    font-weight: bold;
+    font-size: 24px;
+    padding: 1em;
+    text-align: center;
+}
+.roastFont {
+    opacity: .3;
+    font-size: 12px;
+}

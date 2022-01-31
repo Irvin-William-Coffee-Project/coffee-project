@@ -1,33 +1,72 @@
 "use strict"
 
-function renderCoffee(coffee) {
-    var html = '<tr class="coffee">';
-    html += '<td>' + coffee.id + '</td>';
-    html += '<td>' + coffee.name + '</td>';
-    html += '<td>' + coffee.roast + '</td>';
-    html += '</tr>';
+function filterCoffeeByName(event) {
+    event.preventDefault();
+    let tempArray = [];
 
-    return html;
-}
+    for (let i = 0; i < coffees.length; i++) {
 
-function renderCoffees(coffees) {
-    var html = '';
-    for(var i = coffees.length - 1; i >= 0; i--) {
-        html += renderCoffee(coffees[i]);
+        if (coffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && roastSelection.value === 'all') {
+            tempArray.push({'name' : coffees[i].name, 'roast' : coffees[i].roast});
+        }
+
+        else if (coffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && coffees[i].roast === roastSelection.value) {
+            tempArray.push({'name' : coffees[i].name, 'roast' : coffees[i].roast});
+        }
     }
-    return html;
+    coffeeList.innerHTML = printArray(tempArray);
 }
+
+// console.log(printArray(coffees))
+// Clears the inner html of div, prints out each element of the array as a string. returns the updated div html text
+function printArray(myArray) {
+
+    coffeeList.innerHTML = '';
+    for (let i = 0; i < myArray.length; i++) {
+        coffeeList.innerHTML += "<div class='coffeeBox col-5 '>" + myArray[i].name + " " + "<span class='roastFont'>" + myArray[i].roast + "</span>" + "</div>";
+    }
+    return coffeeList.innerHTML;
+}
+
+
+
+
+
+
+
+
+
+
+// function renderCoffee(coffee) {
+//     var html = '<tr class="coffee">';
+//     html += '<td>' + coffee.name + '</td>';
+//     html += '<td>' + coffee.roast + '</td>';
+//     html += '</tr>';
+//
+//     return html;
+// }
+
+// function renderCoffees(coffees) {
+//     var html = '';
+//     for(var i = coffees.length - 1; i >= 0; i--) {
+//         html += renderCoffee(coffees[i]);
+//     }
+//     return html;
+// }
 
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast) {
+        if (roastSelection.value === 'all') {
+            printArray(coffees);
+        }
+        else if (coffee.roast === selectedRoast) {
             filteredCoffees.push(coffee);
+            coffeeList.innerHTML = printArray(filteredCoffees);
         }
     });
-    tbody.innerHTML = renderCoffees(filteredCoffees);
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
@@ -52,6 +91,15 @@ var tbody = document.querySelector('#coffees');
 var submitButton = document.querySelector('#submit');
 var roastSelection = document.querySelector('#roast-selection');
 
-tbody.innerHTML = renderCoffees(coffees);
+var coffeeList = document.querySelector('.coffee-list');
+let inputValue = document.querySelector('#name-input');
+
 
 submitButton.addEventListener('click', updateCoffees);
+inputValue.addEventListener('keyup', filterCoffeeByName);
+
+printArray(coffees);
+
+tbody.innerHTML = renderCoffees(coffees);
+
+
