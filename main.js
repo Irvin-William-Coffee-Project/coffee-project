@@ -62,9 +62,10 @@ function updateCoffees(e) {
 let newCoffee = [];
 
 function addCoffee(e) {
-	e.preventDefault();
-
-	// newCoffee.push({'id': coffees.length + 1, 'name': submitNameInput.value, 'roast': submitRoastSelection.value});
+	// e.preventDefault()
+	coffees.push({'id': coffees.length + 1, 'name': submitNameInput.value, 'roast': submitRoastSelection.value});
+	localStorage.setItem('coffees', JSON.stringify(coffees));
+	printArray(coffees);
 	// for (let i = 0; i < newCoffee.length; i++) {
 	// let newObject = window.localStorage.getItem("newCoffee");
 	// 	window.localStorage.setItem("newCoffee", JSON.stringify(newCoffee[i]));
@@ -122,7 +123,12 @@ function getLocalStorage() {
 	// 	window.localStorage.setItem("newCoffee", JSON.stringify(newCoffee[i]));
 	// }
 	// coffees.push(JSON.parse(newObject));
-	printArray(coffees)
+
+	// localStorage.setItem('coffees', JSON.stringify(coffees));
+	// let storedCoffee = localStorage.getItem('coffees');
+
+
+	printArray(coffees);
 
 }
 
