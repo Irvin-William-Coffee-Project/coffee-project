@@ -38,7 +38,7 @@ function printArray(myArray) {
 
 	coffeeList.innerHTML = '';
 	for (let i = 0; i < myArray.length; i++) {
-		coffeeList.innerHTML += "<div class='coffeeBox border rounded col-5 m-2'>" + myArray[i].name + " " + "<span class='roastFont'>" + myArray[i].roast + "</span>" + "</div>";
+		coffeeList.innerHTML += "<div class='coffeeBox border rounded d-inline-flex align-items-center text-center justify-content-center col-5 m-2'>" + myArray[i].name + " " + "<span class='roastFont pl-2 d-flex align-items-center'>" + myArray[i].roast + "</span>" + "</div>";
 	}
 	return coffeeList.innerHTML;
 }

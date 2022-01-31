@@ -27,13 +27,19 @@ td, th {
 .coffeeBox {
     font-weight: bold;
     font-size: 24px;
-    padding: 1em;
+    padding: .85em;
     text-align: center;
+
     background-color: rgba(255, 255, 255, 0.81);
+}
+.coffee-list {
+    height: 285px;
+    overflow: scroll;
 }
 .roastFont {
     opacity: .5;
     font-size: .75em;
+
 }
 
 .form-title {
@@ -65,4 +71,13 @@ td, th {
 .coffee-color {
     background-color: #6f4e37;
     color: white;
+}
+
+.carouselDeminsions {
+    width: 85.75%;
+}
+img {
+    max-height: 300px;
+    width: 75%;
+    margin: 0 auto;
 }
