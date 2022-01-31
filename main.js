@@ -38,7 +38,7 @@ function printArray(myArray) {
 
 
 // function renderCoffee(coffee) {
-//     var html = '<tr class="coffee">';
+//     let html = '<tr class="coffee">';
 //     html += '<td>' + coffee.name + '</td>';
 //     html += '<td>' + coffee.roast + '</td>';
 //     html += '</tr>';
@@ -47,8 +47,8 @@ function printArray(myArray) {
 // }
 
 // function renderCoffees(coffees) {
-//     var html = '';
-//     for(var i = coffees.length - 1; i >= 0; i--) {
+//     let html = '';
+//     for(let i = coffees.length - 1; i >= 0; i--) {
 //         html += renderCoffee(coffees[i]);
 //     }
 //     return html;
@@ -56,8 +56,8 @@ function printArray(myArray) {
 
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
-    var selectedRoast = roastSelection.value;
-    var filteredCoffees = [];
+    let selectedRoast = roastSelection.value;
+    let filteredCoffees = [];
     coffees.forEach(function(coffee) {
         if (roastSelection.value === 'all') {
             printArray(coffees);
@@ -69,8 +69,22 @@ function updateCoffees(e) {
     });
 }
 
+let newCoffee = [];
+
+function addCoffee(e){
+    e.preventDefault();
+
+    newCoffee.push({'id': coffees.length + 1, 'name' : submitNameInput.value, 'roast' : submitRoastSelection.value});
+    for (let i = 0; i < newCoffee.length; i++) {
+        window.localStorage.setItem("newCoffee", JSON.stringify(newCoffee[i]));
+    }
+    let newObject = window.localStorage.getItem("newCoffee");
+    coffees.push(JSON.parse(newObject));
+    printArray(coffees);
+}
+
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
-var coffees = [
+let coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
     {id: 2, name: 'Half City', roast: 'light'},
     {id: 3, name: 'Cinnamon', roast: 'light'},
@@ -86,20 +100,27 @@ var coffees = [
     {id: 13, name: 'Italian', roast: 'dark'},
     {id: 14, name: 'French', roast: 'dark'},
 ];
+//search
+let tbody = document.querySelector('#coffees');
+let searchButton = document.querySelector('#search');
+let roastSelection = document.querySelector('#roast-selection');
 
-var tbody = document.querySelector('#coffees');
-var submitButton = document.querySelector('#submit');
-var roastSelection = document.querySelector('#roast-selection');
+//submit
+let submitButton = document.querySelector('#submit');
+let submitRoastSelection = document.querySelector('#submit-roast-type');
+let submitNameInput = document.querySelector("#submit-name-input");
+let myStorage = window.localStorage;
 
-var coffeeList = document.querySelector('.coffee-list');
+
+
+let coffeeList = document.querySelector('.coffee-list');
 let inputValue = document.querySelector('#name-input');
 
 
-submitButton.addEventListener('click', updateCoffees);
+searchButton.addEventListener('click', updateCoffees);
+submitButton.addEventListener('click', addCoffee);
 inputValue.addEventListener('keyup', filterCoffeeByName);
 
 printArray(coffees);
-
-tbody.innerHTML = renderCoffees(coffees);
 
 

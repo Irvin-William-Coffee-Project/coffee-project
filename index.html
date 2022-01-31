@@ -7,30 +7,52 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Coffee!</h1>
+<div class="container">
+    <h1 class="text-center p-3">Coffee!</h1>
 
 
-<div class="container border">
-    <div class="row">
-        <div class="coffee-list col-6 row"></div>
-        <form class="col-6">
-            <div class="card">
-                <div class="card-body">
-                    <h6>Coffee Name</h6>
-                    <input type="text" id="name-input">
-                </div>
-                <div class="card-body">
-                    <label for="roast-selection"></label>
-                    <select id="roast-selection">
-                        <option>all</option>
-                        <option>light</option>
-                        <option>medium</option>
-                        <option>dark</option>
-                    </select>
-                    <input id="submit" type="submit" />
-                </div>
+    <div class="container border">
+        <div class="row">
+            <div class="coffee-list col-sm-8 row"></div>
+            <div class="col-sm-4">
+                <form class="mt-3">
+
+                    <div class="form-group">
+                        <label>Coffee Name</label>
+                        <input type="text" class="form-control" aria-describedby="coffee-search" id="name-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="roast-selection">Roast</label>
+                        <select class="form-control" id="roast-selection">
+                            <option>all</option>
+                            <option>light</option>
+                            <option>medium</option>
+                            <option>dark</option>
+                        </select>
+                        <button id="search" class="btn btn-primary mt-3" type="submit">Search</button>
+                    </div>
+                </form>
+
+                <form class="mt-3">
+                    <h2 class="text-center">Add a coffee</h2>
+                    <div class="form-group">
+                        <label>Coffee Name</label>
+                        <input type="text" class="form-control" aria-describedby="coffee-search" id="submit-name-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="submit-roast-type">Roast</label>
+                        <select class="form-control" id="submit-roast-type">
+                            <option>all</option>
+                            <option>light</option>
+                            <option>medium</option>
+                            <option>dark</option>
+                        </select>
+                        <input id="submit" class="btn btn-primary mt-3" type="submit" />
+                    </div>
+                </form>
             </div>
-        </form>
+
+        </div>
     </div>
 </div>
 
