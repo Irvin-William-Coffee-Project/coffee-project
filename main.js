@@ -17,6 +17,7 @@ let coffees = [
 	{id: 13, name: 'Italian', roast: 'dark'},
 	{id: 14, name: 'French', roast: 'dark'},
 ];
+
 function filterCoffeeByName(event) {
 	event.preventDefault();
 	let tempArray = [];
@@ -44,8 +45,6 @@ function printArray(myArray) {
 }
 
 
-
-
 function updateCoffees(e) {
 	e.preventDefault(); // don't submit the form, we just want to update the data
 	let selectedRoast = roastSelection.value;
@@ -63,12 +62,17 @@ function updateCoffees(e) {
 //add new coffee function
 let newCoffee = [];
 let oldCoffeesPlusNewCoffees = [];
-function addCoffee(e) {
-	e.preventDefault();
 
+function addCoffee(e) {
+	for (let i = 0; i < oldCoffeesPlusNewCoffees.length; i++) {
+		if (submitNameInput.value === oldCoffeesPlusNewCoffees[i].name.toLowerCase() && submitRoastSelection.value === oldCoffeesPlusNewCoffees[i].roast.toLowerCase()){
+			alert("Coffee type already exists");
+			return;
+		}
+	}
 	newCoffee.push({'id': coffees.length + 1, 'name': submitNameInput.value, 'roast': submitRoastSelection.value});
 
-	localStorage.setItem('localStorage',JSON.stringify(newCoffee));
+	localStorage.setItem('localStorage', JSON.stringify(newCoffee));
 
 	oldCoffeesPlusNewCoffees = coffees.concat(newCoffee);
 	console.log(oldCoffeesPlusNewCoffees);
