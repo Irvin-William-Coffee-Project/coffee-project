@@ -21,12 +21,12 @@ function filterCoffeeByName(event) {
 	event.preventDefault();
 	let tempArray = [];
 
-	for (let i = 0; i < coffees.length; i++) {
+	for (let i = 0; i < oldCoffeesPlusNewCoffees.length; i++) {
 
-		if (coffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && roastSelection.value === 'all') {
-			tempArray.push({'name': coffees[i].name, 'roast': coffees[i].roast});
-		} else if (coffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && coffees[i].roast === roastSelection.value) {
-			tempArray.push({'name': coffees[i].name, 'roast': coffees[i].roast});
+		if (oldCoffeesPlusNewCoffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && roastSelection.value === 'all') {
+			tempArray.push({'name': oldCoffeesPlusNewCoffees[i].name, 'roast': oldCoffeesPlusNewCoffees[i].roast});
+		} else if (oldCoffeesPlusNewCoffees[i].name.toLowerCase().includes(inputValue.value.toLowerCase()) === true && oldCoffeesPlusNewCoffees[i].roast === roastSelection.value) {
+			tempArray.push({'name': oldCoffeesPlusNewCoffees[i].name, 'roast': oldCoffeesPlusNewCoffees[i].roast});
 		}
 	}
 	coffeeList.innerHTML = printArray(tempArray);
@@ -50,9 +50,9 @@ function updateCoffees(e) {
 	e.preventDefault(); // don't submit the form, we just want to update the data
 	let selectedRoast = roastSelection.value;
 	let filteredCoffees = [];
-	coffees.forEach(function (coffee) {
+	oldCoffeesPlusNewCoffees.forEach(function (coffee) {
 		if (roastSelection.value === 'all') {
-			printArray(coffees);
+			printArray(oldCoffeesPlusNewCoffees);
 		} else if (coffee.roast === selectedRoast) {
 			filteredCoffees.push(coffee);
 			coffeeList.innerHTML = printArray(filteredCoffees);
